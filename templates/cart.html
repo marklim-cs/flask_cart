@@ -3,15 +3,23 @@
 {% block body %}
 
     <h1>Cart</h1>
-    <ol>
-        {% for book in books %}
-            <li>{{ book[1] }}</li>
-            <form action="/delete" method="post">
-                <input name="id" type="hidden" value="{{ book[0] }}">
-                <button type="submit">Delete</button>
-            </form>
-        {% endfor %}
-    </ol>
-    <button onclick="window.history.back()">Back to Novels</button>
+    <div class="container">
+        <ol class="cart-list">
+            {% for book in books %}
+                <li class="cart-item">
+                    <div class="cart-info">
+                        {{ book[1] }}
+                    </div>
+                    <div class="cart-actions">
+                        <form action="/delete" method="post">
+                            <input name="id" type="hidden" value="{{ book[0] }}">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+        <button onclick="window.history.back()">Back to Novels</button>
+    </div>
 
 {% endblock %}
