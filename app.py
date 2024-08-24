@@ -57,8 +57,9 @@ def cart():
 @app.route("/delete", methods=["POST"])
 def delete():
     book_id = request.form.get("id")
-    db = get_db()
-    if book_id:
-        db.execute("DELETE FROM books WHERE id = ?", book_id)
-        db.commit()
+    if book_id and "cart" in session:
+        try:
+            session["cart"].remove(book_id)
+        except ValueError:
+            pass
     return redirect("/cart") 
