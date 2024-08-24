@@ -22,13 +22,6 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-BOOKS = ["Pride and Prejudice",
-         "Little Women", 
-         "To Kill a Mockingbird",
-         "The Great Gatsby", 
-         "Jane Eyre", 
-         "Nineteen Eighty-Four"]
-
 @app.route("/")
 def index():
     db = get_db()
@@ -60,3 +53,12 @@ def cart():
         books = []
 
     return render_template("cart.html", books=books)
+
+@app.route("/delete", methods=["POST"])
+def delete():
+    book_id = request.form.get("id")
+    db = get_db()
+    if book_id:
+        db.execute("DELETE FROM books WHERE id = ?", book_id)
+        db.commit()
+    return redirect("/cart") 

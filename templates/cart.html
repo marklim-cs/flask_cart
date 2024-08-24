@@ -6,6 +6,10 @@
     <ol>
         {% for book in books %}
             <li>{{ book[1] }}</li>
+            <form action="/delete" method="post">
+                <input name="id" type="hidden" value="{{ book[0] }}">
+                <button type="submit">Delete</button>
+            </form>
         {% endfor %}
     </ol>
 
