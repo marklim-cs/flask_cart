@@ -1,10 +1,13 @@
 import sqlite3
+import os
+from dotenv import load_dotenv
 from flask import Flask, g, render_template, session, request, redirect
 from flask_session import Session
 
 app = Flask(__name__)
 
-DATABASE = "/Users/marinaclimovici/dev/flask_training/store/store.db"
+load_dotenv()
+DATABASE = os.getenv('DATABASE_URL')
 
 def get_db():
     db = getattr(g, '_database', None)
